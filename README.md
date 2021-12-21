@@ -25,7 +25,7 @@ The easiest way to deploy this Bot
 
 ## Devloper
 
-#### • [Ctzfamily](https://github.com/Ctzfamily) (OWNER) 
+#### • [harshahero](https://github.com/devilharsha) (OWNER) 
 
 
 ## Special Credits
