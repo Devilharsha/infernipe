@@ -16,7 +16,7 @@
 </p>
 
 > If You're Going To Fork This Repo Then Don't Forget To Hit a Star ✯
-## Available on Telegram as [@VegetaRobot](https://t.me/VegetaRobot)
+## Available on Telegram as [@Infernipe_bot](https://t.me/Infernipe_bot)
 
 ## ✨ Easy To Deploy ✨
 The easiest way to deploy this Bot
@@ -35,5 +35,5 @@ The easiest way to deploy this Bot
 
 
 # 🗡️ Support
-<a href="https://t.me/PigasusSupport"><img src="https://img.shields.io/badge/Support 🎉-Telegram%20Group-blue.svg?logo=telegram"></a>
-<a href="https://t.me/PigasusUpdates"><img src="https://img.shields.io/badge/Updates 💥-Telegram%20Group-blue.svg?logo=telegram"></a>
+<a href="https://t.me/sctbotssupport"><img src="https://img.shields.io/badge/Support 🎉-Telegram%20Group-blue.svg?logo=telegram"></a>
+<a href="https://t.me/sctbots"><img src="https://img.shields.io/badge/Updates 💥-Telegram%20Group-blue.svg?logo=telegram"></a>
