@@ -27,6 +27,7 @@ The easiest way to deploy this Bot
 
 #### • [harshahero](https://github.com/devilharsha) (OWNER) 
 
+#### • [ryuk](https://github.com/ultroi) (OWNER)
 
 ## Special Credits
 
