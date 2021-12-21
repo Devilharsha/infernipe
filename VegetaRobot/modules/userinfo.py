@@ -15,7 +15,7 @@ from telegram.error import BadRequest
 from telegram.utils.helpers import escape_markdown, mention_html
 
 from VegetaRobot import (DEV_USERS, OWNER_ID, DRAGONS, DEMONS, TIGERS, WOLVES,
-                          INFOPIC, dispatcher, sw)
+                          INFOPIC, dispatcher, sw, SUPPORT_CHAT, UPDATES_CHANNEL)
 from VegetaRobot.__main__ import STATS, TOKEN, USER_INFO
 import VegetaRobot.modules.sql.userinfo_sql as sql
 from VegetaRobot.modules.disable import DisableAbleCommandHandler
@@ -24,7 +24,14 @@ from VegetaRobot.modules.sql.afk_sql import is_afk, check_afk_status
 from VegetaRobot.modules.sql.users_sql import get_user_num_chats
 from VegetaRobot.modules.helper_funcs.chat_status import sudo_plus
 from VegetaRobot.modules.helper_funcs.extraction import extract_user
-from VegetaRobot import telethn as SaitamaTelethonClient, TIGERS, DRAGONS, DEMONS
+from VegetaRobot import telethn as vegetaTelethonClient, TIGERS, DRAGONS, DEMONS
+
+buttons = [
+    [
+      InlineKeyboardButton(text="❌ Delete ❌", callback_data="unbanb_del"
+         ),
+    ],
+] 
 
 
 def no_by_per(totalhp, percentage):
@@ -151,7 +158,7 @@ def get_id(update: Update, context: CallbackContext):
                 parse_mode=ParseMode.HTML)
 
 
-@SaitamaTelethonClient.on(
+@vegetaTelethonClient.on(
     events.NewMessage(
         pattern='/ginfo ',
         from_users=(TIGERS or []) + (DRAGONS or []) + (DEMONS or [])))
@@ -274,13 +281,13 @@ def info(update: Update, context: CallbackContext):
         text += "\n\n[BOT OWNER]"
         disaster_level_present = True
     elif user.id in DEV_USERS:
-        text += "\n\n[S-Ranks] OF BOT"
+        text += "\n\n[S-Ranks] - OF BOT"
         disaster_level_present = True
     elif user.id in DRAGONS:
-        text += "\n\n[A-Ranks] OF BOT"
+        text += "\n\n[A-Ranks] - OF BOT"
         disaster_level_present = True
     elif user.id in DEMONS:
-        text += "\n\n[B-Ranks] OF BOT"
+        text += "\n\n[B-Ranks] - OF BOT"
         disaster_level_present = True
     elif user.id in TIGERS:
         text += "\n\nThe Power level of this person is 'tigers of vegeta'."
@@ -290,7 +297,7 @@ def info(update: Update, context: CallbackContext):
         disaster_level_present = True
 
     if disaster_level_present:
-        text += ' \n[<a href="https://t.me/pegasusxteam/36">What is Ranks</a>]'.format(
+        text += ' \n[<a href="https://t.me/pegasusxteam/36">WHAT IS RANKS</a>]'.format(
             bot.username)
 
     try:
@@ -321,7 +328,7 @@ def info(update: Update, context: CallbackContext):
             context.bot.send_photo(
             chat.id,
             photo=profile,
-            caption=(text),
+            caption=(text),reply_markup=InlineKeyboardMarkup(buttons),
             parse_mode=ParseMode.HTML,
             disable_web_page_preview=True,
         )
@@ -410,11 +417,11 @@ def stats(update: Update, context: CallbackContext):
                 [
                   [                  
                        InlineKeyboardButton(
-                             text="Support",
+                             text="💭Support",
                              url=f"https://t.me/VegetaSupport"),
                        InlineKeyboardButton(
-                             text="Updates",
-                             url="https://t.me/VegetaUpdatea")
+                             text="📢Updates",
+                             url="https://t.me/VegetaUpdates")
                      ] 
                 ]
             ),
@@ -530,7 +537,6 @@ Examples:
 
 *Overall Information about you:*
  • `/info` or `/status`*:* get information about a user.
- • `/myinfo`: shows your info in inline button
  
 
 """

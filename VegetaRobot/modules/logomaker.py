@@ -10,8 +10,9 @@ import time
 from io import BytesIO
 from requests import get
 from telethon.tl.types import InputMessagesFilterPhotos
+from telethon import events, Button, custom, version
 
-from VegetaRobot import OWNER_ID, SUPPORT_CHAT
+from VegetaRobot import OWNER_ID, SUPPORT_CHAT, UPDATES_CHANNEL
 from VegetaRobot.events import register
 from VegetaRobot import telethn
 from PIL import Image, ImageDraw, ImageFont
@@ -84,7 +85,8 @@ async def lego(event):
     draw.text((x, y), text, font=font, fill="white", stroke_width=1, stroke_fill="black")
     fname = "logo.png"
     img.save(fname, "png")
-    await telethn.send_file(event.chat_id, file=fname, caption = f"**Made by @VegetaRobot**")         
+    await telethn.send_file(event.chat_id, file=fname, caption ="**Made by @VegetaRobot**")
+    
     await pesan.delete()
     if os.path.exists(fname):
             os.remove(fname)

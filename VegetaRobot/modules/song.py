@@ -4,7 +4,7 @@ import aiohttp
 import youtube_dl
 
 from pyrogram import filters
-from VegetaRobot import pgram
+from VegetaRobot import pgram, SUPPORT_CHAT
 from youtube_search import YoutubeSearch
 from VegetaRobot.pyroerror import capture_err
 from VegetaRobot.modules.disable import DisableAbleCommandHandler
@@ -63,7 +63,7 @@ def song(client, message):
         message.reply_audio(audio_file, caption=rep, thumb=thumb_name, parse_mode='md', title=title, duration=dur)
         m.delete()
     except Exception as e:
-        m.edit('An error Occured! \nReport at @PegasusSupportOfficial')
+        m.edit(f'An error Occured! \nReport at @{SUPPORT_CHAT}')
         print(e)
 
     try:

@@ -475,12 +475,13 @@ def tigerlist(update: Update, context: CallbackContext):
             pass
     update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
 
+BRANK_IMG= "https://telegra.ph/file/08b77206cbd0b2d661054.jpg"
 
 @run_async
 @whitelist_plus
 def supportlist(update: Update, context: CallbackContext):
     bot = context.bot
-    reply = "<b>Known B Rank Hunters 👹:</b>\n"
+    reply = "<b>Known B-Rank Hunters 👹:</b>\n"
     for each_user in DEMONS:
         user_id = int(each_user)
         try:
@@ -488,15 +489,16 @@ def supportlist(update: Update, context: CallbackContext):
             reply += f"• {mention_html(user_id, html.escape(user.first_name))}\n"
         except TelegramError:
             pass
-    update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
+    update.effective_message.reply_photo(BRANK_IMG,caption=reply, parse_mode=ParseMode.HTML)
 
+ARANK_IMG= "https://telegra.ph/file/10c8c5db724a7f7c004b0.jpg"
 
 @run_async
 @whitelist_plus
 def sudolist(update: Update, context: CallbackContext):
     bot = context.bot
     true_sudo = list(set(DRAGONS) - set(DEV_USERS))
-    reply = "<b>Known A Rank Hunters 🐉:</b>\n"
+    reply ="<b>Known A-RANK Hunters 🐉:</b>\n"
     for each_user in true_sudo:
         user_id = int(each_user)
         try:
@@ -504,7 +506,7 @@ def sudolist(update: Update, context: CallbackContext):
             reply += f"• {mention_html(user_id, html.escape(user.first_name))}\n"
         except TelegramError:
             pass
-    update.effective_message.reply_text(reply, parse_mode=ParseMode.HTML)
+    update.effective_message.reply_photo(ARANK_IMG,caption=reply, parse_mode=ParseMode.HTML)
 
 
 @run_async

@@ -1,5 +1,7 @@
 import html
 
+# this module ban type's and kick type make by @ctzfamily and some friends
+
 from telegram import (
     ParseMode,
     Update,
@@ -39,6 +41,10 @@ from VegetaRobot.modules.helper_funcs.extraction import extract_user_and_text
 from VegetaRobot.modules.helper_funcs.string_handling import extract_time
 from VegetaRobot.modules.log_channel import gloggable, loggable
 
+UNBAN_IMG= "https://telegra.ph/file/0ac714f6c537a2570cfd3.mp4"
+BAN_IMG= "https://telegra.ph/file/35ae9ea0ae57d53b98c0f.mp4"
+KICK_IMG= "https://telegra.ph/file/34462049fc4f176297132.mp4"
+SELF_KICK_IMG= "https://telegra.ph/file/f1d4f976d2e90fa40740c.mp4"
 
 @run_async
 @connection_status
@@ -124,21 +130,18 @@ def ban(update: Update, context: CallbackContext) -> str:
         if reason:
             reply += f"\n<code> </code><b>• Reason:</b> \n{html.escape(reason)}"
 
-        bot.sendMessage(
-            chat.id,
-            reply,
+        bot.send_video(
+            chat.id, BAN_IMG,caption=reply,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                        InlineKeyboardButton(
-                            text="❕Unban", callback_data=f"unbanb_unban={user_id}"
-                        ),
-                        InlineKeyboardButton(text="❌ Delete", callback_data="unbanb_del"),
+       InlineKeyboardButton(text="❕Unban", callback_data=f"unbanb_unban={user_id}"),
+       InlineKeyboardButton(text="❌ Delete", callback_data="unbanb_del"),
                     ]
                 ]
             ),
             parse_mode=ParseMode.HTML,
-        )
+            )
         return log
 
     except BadRequest as excp:
@@ -146,7 +149,7 @@ def ban(update: Update, context: CallbackContext) -> str:
             # Do not reply
             if silent:
                 return log
-            message.reply_text("Banned!", quote=False)
+            message.reply_text("Baka is Banned!", quote=False)
             return log
         else:
             LOGGER.warning(update)
@@ -163,7 +166,6 @@ def ban(update: Update, context: CallbackContext) -> str:
 
 
 @run_async
-
 @connection_status
 @bot_admin
 @can_restrict
@@ -233,9 +235,9 @@ def temp_ban(update: Update, context: CallbackContext) -> str:
         if reason:
             reply_msg += f"\n<code> </code><b>• Reason:</b> {html.escape(reason)}"
 
-        bot.sendMessage(
+        bot.send_video(
             chat.id,
-            reply_msg,
+            BAN_IMG,caption=reply_msg,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
@@ -307,7 +309,12 @@ def unbanb_btn(update: Update, context: CallbackContext) -> str:
             except BadRequest:
                 pass
             chat.unban_member(user_id)
-            query.message.edit_text("Yep, this user can join!")
+            query.message.delete()
+            bot.send_video(
+            chat.id, #this code made by @ctzfamily & @h0daka
+            UNBAN_IMG, caption= f"<b>👮Admin:</b>\n {mention_html(user.id, user.first_name)} \n <b>👤User: </b>\n {mention_html(member.user.id, member.user.first_name)}!",
+        	    parse_mode=ParseMode.HTML,
+        	)
             bot.answer_callback_query(query.id, text="Unbanned!")
             return (
                 f"<b>{html.escape(chat.title)}:</b>\n"
@@ -366,9 +373,9 @@ def punch(update: Update, context: CallbackContext) -> str:
     res = chat.unban_member(user_id)  # unban on current user = kick
     if res:
         # bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
-        bot.sendMessage(
+        bot.send_video(
             chat.id,
-            f"Removed! {mention_html(member.user.id, html.escape(member.user.first_name))}.",
+            KICK_IMG,caption=f"Removed! {mention_html(member.user.id, html.escape(member.user.first_name))}.",
             parse_mode=ParseMode.HTML,
         )
         log = (
@@ -399,7 +406,8 @@ def punchme(update: Update, context: CallbackContext):
 
     res = update.effective_chat.unban_member(user_id)  # unban on current user = kick
     if res:
-        update.effective_message.reply_text("*removes you out of the group*")
+        update.effective_message.reply_video(SELF_KICK_IMG,caption="<b>❕Baka Noice Try!</b>",parse_mode=ParseMode.HTML,)
+                                             
     else:
         update.effective_message.reply_text("Huh? I can't :/")
 
@@ -439,7 +447,7 @@ def unban(update: Update, context: CallbackContext) -> str:
         return log_message
 
     chat.unban_member(user_id)
-    message.reply_text("Yep, this user can join!")
+    message.reply_video(UNBAN_IMG,caption=f"<b>❕UNBANNED</b>:\n {mention_html(member.user.id, html.escape(member.user.first_name))}",parse_mode=ParseMode.HTML,)
 
     log = (
         f"<b>{html.escape(chat.title)}:</b>\n"

@@ -157,6 +157,15 @@ def baka(update, context):
     msg = update.effective_message
     target = "baka"
     msg.reply_video(nekos.img(target))
+    
+    #kiss is 16+ for single boys
+@run_async
+def kiss(update, context):
+    msg = update.effective_message
+    target = "kiss"
+    msg.reply_video(nekos.img(target))
+    
+
 
 
 ADD_NSFW_HANDLER = CommandHandler("addnsfw", add_nsfw)
@@ -173,6 +182,7 @@ POKE_HANDLER = CommandHandler("poke", poke)
 HOLO_HANDLER = CommandHandler("holo", holo)
 SMUG_HANDLER = CommandHandler("smug", smug)
 BAKA_HANDLER = CommandHandler("baka", baka)
+KISS_HANDLER = CommandHandler("kiss", kiss)
 
 
 dispatcher.add_handler(ADD_NSFW_HANDLER)
@@ -188,6 +198,7 @@ dispatcher.add_handler(POKE_HANDLER)
 dispatcher.add_handler(HOLO_HANDLER)
 dispatcher.add_handler(SMUG_HANDLER)
 dispatcher.add_handler(BAKA_HANDLER)
+dispatcher.add_handler(KISS_HANDLER)
 
 __handlers__ = [
     ADD_NSFW_HANDLER,
@@ -203,14 +214,14 @@ __handlers__ = [
     HOLO_HANDLER,
     SMUG_HANDLER,
     BAKA_HANDLER,
+    KISS_HANDLER,
 ]
 
 __help__ = """
-Module credits: [VegetaRobot](https://github.com/Ctzfamily/VegetaRobot/edit/Vegeta/VegetaRobot/modules/nsfw.py) ,
-Also thanks to [EverythingSuckz](https://t.me/EverythingSuckz) for NSFW filter. and full sucks removed by [CT_PRO](t.me/ctzfamily)
-    
+Module credits: [VegetaRobot](https://github.com/Ctzfamily/VegetaRobot/Vegeta/VegetaRobot/modules/goodnsfw.py) ,
+
 Usage:
-    
+   
 /addnsfw : Enable NSFW mode
 /rmnsfw : Disable NSFW mode
  
@@ -224,6 +235,8 @@ Commands :
  - /poke: Sends Random Poke GIFs.
  - /holo: Sends Random Holo source Images.
  - /baka: Sends Random Baka Shout GIFs.
+ - /kiss - sends random anime boy girl kiss gif
+ 
 """
 
 __mod_name__ = "🐰AnimePG"
